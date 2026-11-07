@@ -13,3 +13,5 @@
 .touch #touch-fire{transform:translate(calc(-1 * var(--hud-x,0px)),var(--hud-y,0px)) scale(var(--hud-scale,1));opacity:var(--hud-opacity,.85)}
 
 .touch #touch-switch{position:absolute;right:165px;bottom:145px;width:64px;height:42px;border:1px solid #c7ddc54a;border-radius:22px;background:#07130ecc;font-size:10px;pointer-events:auto;touch-action:manipulation;opacity:var(--hud-opacity,.85);transform:translate(calc(-1 * var(--hud-x,0px)),var(--hud-y,0px)) scale(var(--hud-scale,1));transform-origin:bottom right}
+
+.touch #touch-holster{position:absolute;right:165px;bottom:196px;width:70px;height:42px;border:1px solid #c7ddc54a;border-radius:22px;background:#07130ecc;font-size:10px;pointer-events:auto;touch-action:manipulation;opacity:var(--hud-opacity,.85)}
