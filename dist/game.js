@@ -77,7 +77,7 @@ function enterPlay(){vehicleAudio.stop();mode='play';cutTime=0;grace=12;$('cinem
 function lockPointer(){if(touch||mode!=='play'||document.pointerLockElement)return;try{const result=$('world').requestPointerLock();if(result?.catch)result.catch(()=>{toast('Clique e arraste na tela para olhar.');});}catch{}}
 function releasePointer(){if(document.pointerLockElement)document.exitPointerLock()}
 function clearInput(){keys.clear();joy.x=joy.y=0;repairHeld=false;$('stick').style.transform='';$('touch-run').style.background='';}
-function resetGame(resume=false){state=resume?parseSave(readStore(SAVE))||freshState():freshState();player.x=2.7;player.z=26;player.yaw=.25;player.pitch=0;enemy.x=16;enemy.z=-25;enemy.alert=0;enemy.active=state.clue;monster.visible=state.clue;note.visible=!state.clue;flareTime=0;attackTime=0;shotCooldown=0;stunTime=0;roarCooldown=0;roarTime=0;elapsed=0;state.health=100;state.stamina=100;state.repair=0;lightOn=true;$('light-status').innerHTML='LANTERNA <b>ON</b>';$('damage').style.opacity=0;clearInput();refreshItems();if(!resume)save();}
+function resetGame(resume=false){state=resume?parseSave(readStore(SAVE))||freshState():freshState();player.x=2.7;player.z=26;player.yaw=.25;player.pitch=0;enemy.x=27;enemy.z=-40;enemy.alert=0;enemy.active=state.clue;monster.visible=state.clue;note.visible=!state.clue;flareTime=0;attackTime=0;shotCooldown=0;stunTime=0;roarCooldown=0;roarTime=0;elapsed=0;state.health=100;state.stamina=100;state.repair=0;lightOn=true;$('light-status').innerHTML='LANTERNA <b>ON</b>';$('damage').style.opacity=0;clearInput();refreshItems();if(!resume)save();}
 function start(resume=false){audioStart();$('dialog').close();resetGame(resume);$('menu').hidden=true;if(resume){enterPlay();return}mode='cutscene';cutTime=0;$('skip').hidden=false;$('cinema').hidden=false;$('hud').hidden=true;document.body.classList.add('playing');noise(.6,.1,300);tone(75,4,.08,'sawtooth',48);vehicleAudio.play('Engine_Loop',{loop:true,gain:.35})}
 function showDialog(html){releasePointer();clearInput();$('dialog-body').innerHTML=html;if(!$('dialog').open)$('dialog').showModal()}
 function closeDialog(){const was=mode;$('dialog').close();if(was==='dead'||was==='won'){backMenu();return}if(was==='paused'){mode=lastMode;if(mode==='play')lockPointer();audioStart();}}
@@ -122,27 +122,27 @@ function roar(){const distance=Math.hypot(player.x-enemy.x,player.z-enemy.z),v=M
 let ambientRoarClock=8;
 function updateEnemy(dt,running){if(!enemy.active)return;monster.visible=true;monster.position.set(enemy.x,0,enemy.z);roarCooldown=Math.max(0,roarCooldown-dt);ambientRoarClock-=dt;if(ambientRoarClock<=0){ambientRoarClock=12+Math.random()*9;if(Math.hypot(player.x-enemy.x,player.z-enemy.z)<34&&roarCooldown<=0){roar();roarCooldown=7}}
 if(stunTime>0){stunTime=Math.max(0,stunTime-dt);assets?.animateEnemy(dt,'hit');return}
-const d=Math.hypot(player.x-enemy.x,player.z-enemy.z),detection=running?24:lightOn?19:8,seen=d<detection&&grace<=0&&!sightBlocked(player,enemy,walls);
+if(blocked(enemy.x,enemy.z,walls,1.85)){for(let r=2;r<=12;r+=2){let free=false;for(let i=0;i<24;i++){const a=i*Math.PI/12,x=enemy.x+Math.cos(a)*r,z=enemy.z+Math.sin(a)*r;if(!blocked(x,z,walls,1.85)){enemy.x=x;enemy.z=z;free=true;break}}if(free)break}}const d=Math.hypot(player.x-enemy.x,player.z-enemy.z),detection=running?24:lightOn?19:8,seen=d<detection&&grace<=0&&!sightBlocked(player,enemy,walls);
 if(seen){if(enemy.alert<=0&&roarCooldown<=0){roar();roarTime=1.5;roarCooldown=16;toast('Um rugido entre as árvores. Corra!',3)}enemy.alert=7}else enemy.alert=Math.max(0,enemy.alert-dt);
 if(roarTime>0){roarTime-=dt;monster.rotation.y=Math.atan2(player.x-enemy.x,player.z-enemy.z);assets?.animateEnemy(dt,'call');return}
 let tx,tz,speed;const fleeing=flareTime>0&&Math.hypot(enemy.x-flarePos.x,enemy.z-flarePos.z)<20;
-if(fleeing){tx=enemy.x+(enemy.x-flarePos.x)*5;tz=enemy.z+(enemy.z-flarePos.z)*5;speed=4;enemy.alert=0}else if(enemy.alert>0){tx=player.x;tz=player.z;speed=d<2.8?0:3.7}else{tx=player.x+Math.sin(time*.07)*14;tz=player.z-12+Math.cos(time*.07)*8;speed=grace>0?.3:1.3}
-const dx=tx-enemy.x,dz=tz-enemy.z,n=Math.hypot(dx,dz)||1,px=enemy.x,pz=enemy.z;move(enemy,dx/n*speed*dt,dz/n*speed*dt,walls,.72);
+if(fleeing){tx=enemy.x+(enemy.x-flarePos.x)*5;tz=enemy.z+(enemy.z-flarePos.z)*5;speed=4;enemy.alert=0}else if(enemy.alert>0){tx=player.x;tz=player.z;speed=d<5.2?0:3.7}else{tx=player.x+Math.sin(time*.07)*14;tz=player.z-12+Math.cos(time*.07)*8;speed=grace>0?.3:1.3}
+const dx=tx-enemy.x,dz=tz-enemy.z,n=Math.hypot(dx,dz)||1,px=enemy.x,pz=enemy.z;move(enemy,dx/n*speed*dt,dz/n*speed*dt,walls,1.85);
 if(speed>0&&Math.hypot(enemy.x-px,enemy.z-pz)<speed*dt*.3){
  enemy.stuck+=dt;
  // Probe both tangents instead of repeatedly pushing against the same wall.
  const sign=Math.floor(enemy.stuck/1.1)%2===0?1:-1;
  const stride=speed*dt*1.25;
  const options=[[ -dz/n*sign,dx/n*sign],[dz/n*sign,-dx/n*sign],[-dx/n,-dz/n]];
- for(const [sx,sz] of options){const ox=enemy.x,oz=enemy.z;move(enemy,sx*stride,sz*stride,walls,.72);if(Math.hypot(enemy.x-ox,enemy.z-oz)>.015)break}
+ for(const [sx,sz] of options){const ox=enemy.x,oz=enemy.z;move(enemy,sx*stride,sz*stride,walls,1.85);if(Math.hypot(enemy.x-ox,enemy.z-oz)>.015)break}
  // Recover from long-lived dead ends using a valid nearby point, never inside geometry.
  if(enemy.stuck>3.2){const radii=[1.5,3,5,8];let recovered=false;
  for(const radius of radii){for(let k=0;k<16;k++){const a=k*Math.PI/8+time*.13,x=enemy.x+Math.cos(a)*radius,z=enemy.z+Math.sin(a)*radius;
- if(!blocked(x,z,walls,.85)&&!sightBlocked({x,z},enemy,walls)){enemy.x=x;enemy.z=z;recovered=true;break}}
+ if(!blocked(x,z,walls,1.85)&&!sightBlocked({x,z},enemy,walls)){enemy.x=x;enemy.z=z;recovered=true;break}}
  if(recovered)break}enemy.stuck=recovered?0:2.2}
 }else enemy.stuck=Math.max(0,enemy.stuck-dt*2);
 const traveled=Math.hypot(enemy.x-px,enemy.z-pz),heading=traveled>.001?Math.atan2(enemy.x-px,enemy.z-pz):Math.atan2(player.x-enemy.x,player.z-enemy.z);monster.rotation.y+=Math.atan2(Math.sin(heading-monster.rotation.y),Math.cos(heading-monster.rotation.y))*Math.min(1,dt*5);monster.position.set(enemy.x,0,enemy.z);
-const biting=d<3.05&&grace<=0&&!fleeing&&!sightBlocked(player,enemy,walls);assets?.animateEnemy(dt,biting?'attack':traveled<.001?'idle':speed>2?'run':'walk');attackTime-=dt;
+const biting=d<4.6&&grace<=0&&!fleeing&&!sightBlocked(player,enemy,walls);assets?.animateEnemy(dt,biting?'attack':traveled<.001?'idle':speed>2?'run':'walk');attackTime-=dt;
 if(biting){state.health-=dt*32;if(attackTime<0){noise(.5,.28,450);tone(52,.5,.18,'sawtooth',28);attackTime=.9}if(state.health<=0)die()}else if(d>10)state.health=Math.min(100,state.health+dt*3);
 enemyStep-=dt;if(traveled>.001&&d<20&&enemyStep<=0){noise(.18,.12*(1-d/24),160);tone(38,.14,.09*(1-d/24),'sine',24);enemyStep=speed>2?.35:.65}}
 function die(){vehicleAudio.stop();mode='dead';clearInput();releasePointer();$('hud').hidden=true;showDialog('<span class="kicker">A FLORESTA GUARDOU MAIS UM SEGREDO</span><h2>A luz se apagou.</h2><p>Apague a lanterna para reduzir a distância em que ele percebe você. Correr faz barulho. Guarde um sinalizador para a volta ao carro. Os três tiros do revólver apenas atrasam a criatura.</p><button class="primary" id="retry">TENTAR DO ÚLTIMO PROGRESSO <b>↗</b></button><button class="text-button" id="death-menu">Voltar ao menu <span>→</span></button>');$('retry').onclick=()=>start(true);$('death-menu').onclick=backMenu;noise(1,.3,130)}
