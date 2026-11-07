@@ -35,7 +35,7 @@ FLORESTA ENCANTADA, LAS (l.ohtar).
 https://sketchfab.com/3d-models/floresta-encantada-4c2fcdb9447a4a099e99ad17eff88826
 Autor: https://sketchfab.com/l.ohtar
 Licença CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
-Modificações: extração de duas árvores, um tronco e vegetação; normalização de escala e origem; redução de texturas; cores escurecidas e instanciamento no cenário. Nenhum endosso do autor é sugerido.
+Modificações: extração de duas árvores, um tronco e vegetação; normalização de escala e origem; redução de texturas; cores escurecidas e dessaturadas; novas proporções e distribuição por instanciamento no cenário. Nenhum endosso do autor é sugerido.
 
 .38 Special Revolver, David Boese (imsumdave).
 https://sketchfab.com/3d-models/38-special-revolver-3246c31648204534a2c6d671fe38452e
@@ -45,3 +45,20 @@ USO NÃO COMERCIAL. Esta restrição se aplica ao modelo do revólver, inclusive
 Modificações: redução de texturas, escala e posicionamento para primeira pessoa; uso como objeto coletável. Nenhum endosso do autor é sugerido.
 
 As licenças acima pertencem a seus respectivos assets, sem transferência de autoria. As páginas dos pacotes CC0 foram verificadas em 7 de novembro de 2026; os GLBs da floresta e do revólver incluem os créditos e licenças em asset.extras.
+
+ASSETS ENVIADOS PELO USUÁRIO — versão 1.2
+
+Allosaurus fragilis, joaomoreira28.
+https://sketchfab.com/3d-models/allosaurus-fragilis-5de1fcc39f314723b5e230ab0730f713
+Autor: https://sketchfab.com/joaomoreira28
+Licença CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/
+USO NÃO COMERCIAL. A mesma restrição do revólver também se aplica ao alossauro.
+Modificações: texturas reduzidas para até 512 pixels; seleção de seis animações (repouso, caminhada, corrida, ataque, reação e rugido); redução de chaves constantes e reamostragem a até 15 FPS com interpolação; ajuste de orientação, materiais e velocidade do ataque. Nenhum endosso do autor é sugerido.
+
+Cabana, Elbolillo (Elbolilloduro).
+https://sketchfab.com/3d-models/cabana-700832e6dd2b4b309faf137f2b353676
+Autor: https://sketchfab.com/Elbolilloduro
+Licença CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+Modificações: redução de texturas, escala e orientação, portas ocultadas para permitir passagem, colisões derivadas das paredes do modelo, iluminação e objetos interativos próprios. Nenhum endosso do autor é sugerido.
+
+Os créditos e licenças da cabana e do alossauro foram obtidos do campo asset.extras dos GLBs enviados e preservados nos arquivos otimizados.

@@ -1,3 +1,4 @@
 source-assets/
 qa/
 qa-*.log
+__pycache__/

@@ -1,10 +1,11 @@
-export const ITEMS=[{id:'fuse',name:'Fusível',place:'CABANA',x:-14,z:-13},{id:'battery',name:'Bateria',place:'GALPÃO',x:19,z:-27},{id:'fuel',name:'Combustível',place:'ACAMPAMENTO',x:-20,z:-37}];
+export const ITEMS=[{id:'fuse',name:'Fusível',place:'CABANA',x:-12,z:-10.7},{id:'battery',name:'Bateria',place:'GALPÃO',x:19,z:-27},{id:'fuel',name:'Combustível',place:'ACAMPAMENTO',x:-20,z:-37}];
 export const CAR={x:0,z:30};
 export function freshState(){return {version:1,clue:false,items:[],flares:2,health:100,stamina:100,repair:0,weapon:false,ammo:0};}
 export function parseSave(raw){try{const s=JSON.parse(raw);if(s?.version!==1||!Array.isArray(s.items))return null;return {...freshState(),clue:!!s.clue,items:[...new Set(s.items.filter(x=>ITEMS.some(i=>i.id===x)))],flares:Number.isFinite(s.flares)?Math.max(0,Math.min(2,s.flares)):2,weapon:!!s.weapon,ammo:s.weapon&&Number.isFinite(s.ammo)?Math.max(0,Math.min(3,Math.floor(s.ammo))):0};}catch{return null}}
 export function collect(state,id){if(!state.clue||!ITEMS.some(i=>i.id===id)||state.items.includes(id))return false;state.items.push(id);return true}
 export function goal(state){if(!state.clue)return {x:-12,z:-6,label:'CABANA',text:'Procure ajuda na cabana iluminada.'};const next=ITEMS.find(i=>!state.items.includes(i.id));return next?{...next,label:next.place,text:`Encontre ${next.id==='battery'?'a bateria':next.id==='fuel'?'o combustível':'o fusível'} · ${next.place.toLowerCase()}.`}:{...CAR,label:'CARRO',text:state.repair>=100?'Entre no carro e fuja.':'Volte ao carro e instale as peças.'};}
-export function blocked(x,z,walls,r=.35){return Math.abs(x)>46||z < -53||z>60||walls.some(w=>x>w.x-w.w/2-r&&x<w.x+w.w/2+r&&z>w.z-w.d/2-r&&z<w.z+w.d/2+r)}
+function nearSegment(x,z,segment,r){const [a,b]=segment,dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return Math.hypot(x-a[0]-t*dx,z-a[1]-t*dz)<r+.035}
+export function blocked(x,z,walls,r=.35){return Math.abs(x)>46||z < -53||z>60||walls.some(w=>w.segment?nearSegment(x,z,w.segment,r):x>w.x-w.w/2-r&&x<w.x+w.w/2+r&&z>w.z-w.d/2-r&&z<w.z+w.d/2+r)}
 export function move(body,dx,dz,walls,r=.35){if(!blocked(body.x+dx,body.z,walls,r))body.x+=dx;if(!blocked(body.x,body.z+dz,walls,r))body.z+=dz;return body}
 export function advanceRepair(state,dt,near,held){if(state.items.length!==3||!near||!held)return false;state.repair=Math.min(100,state.repair+dt*22);return state.repair>=100}
 export function bearing(player,target){return Math.atan2(-(target.x-player.x),-(target.z-player.z));}
