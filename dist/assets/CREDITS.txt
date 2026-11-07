@@ -14,6 +14,34 @@ Reduzida para 512 pixels para uso neste jogo.
 Chuva: Google Sound Library, weather/rain_heavy_loud.ogg.
 https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg
 https://developers.google.com/assistant/tools/sound-library
-Trecho reduzido para 18 segundos, mono, 22050 Hz. Consulte os termos da biblioteca para reutilizações fora deste projeto.
+Trecho reduzido para 18 segundos, mono, 22050 Hz, convertido para AAC/M4A. Consulte os termos da biblioteca para reutilizações fora deste projeto.
 
 A geração de capa no fal não foi executada por falta de créditos; a capa entregue é vetorial original.
+
+ASSETS ENVIADOS PELO USUÁRIO — versão 1.1
+
+PSX Style Cars (August 2023), GGBotNet.
+https://ggbot.itch.io/psx-style-cars
+Licença CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
+Usados: Car 01 (station wagon), textura car_gray.png, sons de motor, aceleração, porta e capô.
+Modificações: conversão OBJ → GLB, escala para o cenário, textura otimizada e áudio AAC mono para compatibilidade móvel.
+
+PSX First Person Arms, Drillimpact.
+https://drillimpact.itch.io/psx-first-person-arms-free
+Licença CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
+Usado: arms_rig.glb. Modificações: seleção de cinco animações, remoção de dados não usados, textura reduzida, combinação da pose de repouso esquerda com as animações de arma direitas.
+
+FLORESTA ENCANTADA, LAS (l.ohtar).
+https://sketchfab.com/3d-models/floresta-encantada-4c2fcdb9447a4a099e99ad17eff88826
+Autor: https://sketchfab.com/l.ohtar
+Licença CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+Modificações: extração de duas árvores, um tronco e vegetação; normalização de escala e origem; redução de texturas; cores escurecidas e instanciamento no cenário. Nenhum endosso do autor é sugerido.
+
+.38 Special Revolver, David Boese (imsumdave).
+https://sketchfab.com/3d-models/38-special-revolver-3246c31648204534a2c6d671fe38452e
+Autor: https://sketchfab.com/imsumdave
+Licença CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/
+USO NÃO COMERCIAL. Esta restrição se aplica ao modelo do revólver, inclusive nesta distribuição. Para uma edição comercial, substitua-o ou obtenha autorização específica do autor.
+Modificações: redução de texturas, escala e posicionamento para primeira pessoa; uso como objeto coletável. Nenhum endosso do autor é sugerido.
+
+As licenças acima pertencem a seus respectivos assets, sem transferência de autoria. As páginas dos pacotes CC0 foram verificadas em 7 de novembro de 2026; os GLBs da floresta e do revólver incluem os créditos e licenças em asset.extras.

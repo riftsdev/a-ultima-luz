@@ -1,0 +1,5 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {freshState,takeWeapon,shootAt,parseSave} from '../dist/game-core.js';
+test('optional weapon grants exactly three rounds once, while old saves remain valid',()=>{const s=freshState();assert.equal(takeWeapon(s),false);s.clue=true;assert.ok(takeWeapon(s));assert.equal(s.ammo,3);assert.equal(takeWeapon(s),false);const p={x:0,z:0,yaw:0,pitch:0},e={x:0,z:-8,active:true};for(let i=0;i<3;i++)assert.ok(shootAt(s,p,e,[]).hit);assert.deepEqual(shootAt(s,p,e,[]),{fired:false,hit:false});const copy=parseSave(JSON.stringify(s));assert.equal(copy.ammo,0);assert.equal(copy.weapon,true);assert.equal(parseSave('{"version":1,"clue":true,"items":[]}').weapon,false)});
+test('aim, range and walls matter; a missed shot still consumes ammunition',()=>{const s=freshState();s.clue=true;takeWeapon(s);const p={x:0,z:0,yaw:0,pitch:0};assert.equal(shootAt(s,p,{x:8,z:0,active:true},[]).hit,false);assert.equal(shootAt(s,p,{x:0,z:-30,active:true},[]).hit,false);assert.equal(shootAt(s,p,{x:0,z:-8,active:true},[{x:0,z:-4,w:3,d:.3,sight:true}]).hit,false);assert.equal(s.ammo,0)});
