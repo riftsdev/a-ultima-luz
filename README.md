@@ -1,6 +1,10 @@
 # A Última Luz
 
+[Jogar no navegador](https://riftsdev.github.io/a-ultima-luz/)
+
 Jogo de terror 3D em HTML, CSS e JavaScript, em português. Arquivos prontos em `dist/`; publique esse diretório por HTTPS. Não abra `index.html` por `file://`, pois o jogo utiliza módulos JavaScript.
+
+No GitHub Pages, mantenha a origem na branch `main`, pasta `/ (root)`. O `index.html` da raiz abre o jogo em `dist/`, e `.nojekyll` preserva os arquivos estáticos. O manifesto e o service worker usam caminhos relativos, compatíveis com `/a-ultima-luz/dist/`.
 
 Inclui introdução de 23 segundos, cabana acessível, floresta, chuva, áudio, monstro humanoide, três peças coletáveis, reparo, vitória e derrota, progresso local, pausa, controles de teclado/mouse e toque, qualidade gráfica e PWA com ícones próprios. Sem backend ou dependências externas durante a partida.
 
