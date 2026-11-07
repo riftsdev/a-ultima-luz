@@ -1,0 +1,19 @@
+A ÚLTIMA LUZ — Créditos e fontes
+
+Jogo, cenário geométrico, personagem, interface, ícone SVG, narrativa e efeitos sintetizados: criação original para este projeto.
+
+Three.js r169 — biblioteca de renderização, licença MIT.
+https://github.com/mrdoob/three.js
+https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js
+Licença reproduzida em THREE-LICENSE.txt.
+
+Textura de terreno: arquivo grasslight-big.jpg, exemplos Three.js r169.
+https://github.com/mrdoob/three.js/blob/r169/examples/textures/terrain/grasslight-big.jpg
+Reduzida para 512 pixels para uso neste jogo.
+
+Chuva: Google Sound Library, weather/rain_heavy_loud.ogg.
+https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg
+https://developers.google.com/assistant/tools/sound-library
+Trecho reduzido para 18 segundos, mono, 22050 Hz. Consulte os termos da biblioteca para reutilizações fora deste projeto.
+
+A geração de capa no fal não foi executada por falta de créditos; a capa entregue é vetorial original.
