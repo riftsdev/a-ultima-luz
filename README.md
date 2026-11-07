@@ -15,3 +15,14 @@ O revólver fica na mesinha da cabana e é opcional. Clique com o mouse capturad
 `npm test` valida progressão, salvamento, colisões e reparo. A ferramenta de navegador não estava disponível durante a criação, portanto aparência, desempenho em aparelhos reais, áudio e instalação PWA precisam de validação nesses dispositivos. Não há garantia de 60 FPS em todos os aparelhos; o modo automático reduz a qualidade quando necessário.
 
 O site é privado no Sites por padrão e exige autenticação para o primeiro acesso. Depois do carregamento completo, o service worker oferece cache offline em navegadores que permitem sua instalação. `assets/CREDITS.txt` lista as fontes dos assets.
+
+
+Para executar localmente, com Python 3 instalado:
+
+```sh
+python3 -m http.server 8080 --directory dist
+```
+
+Abra http://localhost:8080. Para rodar os testes, instale Node.js 20 ou mais recente e execute `npm test`; não é necessário instalar pacotes npm.
+
+Os scripts em `tools/` são utilitários de preparação, dispensáveis para jogar. Eles usam Blender 4.x e Python com Pillow. `source-assets/` contém os originais de trabalho e não é versionado. Defina `SURVIVAL_ASSET_DIR` para apontar à pasta dos GLBs originais quando reexecutar a preparação. As versões otimizadas necessárias ao jogo já estão incluídas em `dist/assets/`.

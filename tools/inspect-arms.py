@@ -1,8 +1,9 @@
+import os
 import bpy,sys,json,math
 from pathlib import Path
 from mathutils import Vector
-root=Path('/workspace/sites/a-ultima-luz')
-source=Path('/tmp/codex-remote-attachments/01a1b3dd-416b-736a-8cfe-c6164df48005/8257DCDC-CB69-46C0-9097-B3A1E8893DB0')
+root=Path(__file__).resolve().parents[1]
+source=Path(os.environ.get('SURVIVAL_ASSET_DIR', str(root/'source-assets')))
 out=root/'qa';out.mkdir(exist_ok=True)
 def reset():
  bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
