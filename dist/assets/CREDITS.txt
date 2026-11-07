@@ -62,3 +62,7 @@ Licença CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
 Modificações: redução de texturas, escala e orientação, portas ocultadas para permitir passagem, colisões derivadas das paredes do modelo, iluminação e objetos interativos próprios. Nenhum endosso do autor é sugerido.
 
 Os créditos e licenças da cabana e do alossauro foram obtidos do campo asset.extras dos GLBs enviados e preservados nos arquivos otimizados.
+
+VERSÃO 1.20.3
+Pose de empunhadura: combinação das animações originais de Drillimpact, usando dedos fechados da animação de agarrar e movimento de mira/recuo, com ajuste do indicador e do encaixe do revólver.
+Rugido do alossauro: síntese original para este jogo (harmônicos, ruído filtrado e envelope), exportada em AAC mono. Nenhuma gravação de terceiros foi usada; o gerador está em tools/generate-roar.py.

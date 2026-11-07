@@ -24,6 +24,7 @@ import androidx.webkit.WebViewAssetLoader;
 public final class MainActivity extends Activity {
     private static final String HOST = "appassets.androidplatform.net";
     private WebView game;
+    private boolean backgrounded;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public final class MainActivity extends Activity {
         if (focused) immerse();
     }
     @Override protected void onPause() {
+        backgrounded = true;
         if (game != null) {
             game.evaluateJavascript("window.pauseNativeGame && window.pauseNativeGame()", null);
             game.onPause();
@@ -97,7 +99,11 @@ public final class MainActivity extends Activity {
     }
     @Override protected void onResume() {
         super.onResume();
-        if (game != null) { game.resumeTimers(); game.onResume(); }
+        if (game != null) {
+            game.resumeTimers(); game.onResume();
+            if (backgrounded) game.evaluateJavascript("window.pauseNativeGame && window.pauseNativeGame()", null);
+            backgrounded = false;
+        }
     }
     @Override public void onBackPressed() {
         if (game.canGoBack()) { game.goBack(); return; }

@@ -1,4 +1,4 @@
-export const ITEMS=[{id:'fuse',name:'Fusível',place:'CABANA',x:-12,z:-10.7},{id:'battery',name:'Bateria',place:'GALPÃO',x:19,z:-27},{id:'fuel',name:'Combustível',place:'ACAMPAMENTO',x:-20,z:-37}];
+export const ITEMS=[{id:'fuse',name:'Fusível',place:'CABANA',x:-12,z:-10.7,y:1.245},{id:'battery',name:'Bateria',place:'GALPÃO',x:19,z:-27,y:1.27},{id:'fuel',name:'Combustível',place:'ACAMPAMENTO',x:-20,z:-37,y:.37}];
 export const CAR={x:0,z:30};
 export function freshState(){return {version:1,clue:false,items:[],flares:2,health:100,stamina:100,repair:0,weapon:false,ammo:0};}
 export function parseSave(raw){try{const s=JSON.parse(raw);if(s?.version!==1||!Array.isArray(s.items))return null;return {...freshState(),clue:!!s.clue,items:[...new Set(s.items.filter(x=>ITEMS.some(i=>i.id===x)))],flares:Number.isFinite(s.flares)?Math.max(0,Math.min(2,s.flares)):2,weapon:!!s.weapon,ammo:s.weapon&&Number.isFinite(s.ammo)?Math.max(0,Math.min(3,Math.floor(s.ammo))):0};}catch{return null}}

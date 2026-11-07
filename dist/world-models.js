@@ -20,7 +20,7 @@ export function installAllosaurus(gltf,monster){
  const model=gltf.scene;model.name='Allosaurus fragilis';model.rotation.y=Math.PI;model.position.y=.02;
  model.traverse(o=>{if(o.isMesh){o.frustumCulled=false;o.material.roughness=.88;o.material.metalness=0;o.material.color.multiplyScalar(.85)}});monster.add(model);
  const mixer=new THREE.AnimationMixer(model),actions=new Map();const names={idle:'G_Iddle',walk:'G_Walk',run:'G_Run',attack:'G_Atack',hit:'G_Hit',call:'G_Call'};
- for(const [name,suffix] of Object.entries(names)){const clip=gltf.animations.find(a=>a.name.endsWith(suffix));if(clip){const action=mixer.clipAction(clip);if(name==='attack')action.timeScale=2.3;actions.set(name,action)}}
+ for(const [name,suffix] of Object.entries(names)){const clip=gltf.animations.find(a=>a.name.endsWith(suffix));if(clip){const action=mixer.clipAction(clip);if(name==='attack')action.timeScale=2.3;if(name==='call')action.timeScale=1.35;actions.set(name,action)}}
  let current,currentName='';function update(dt,name='idle'){if(name!==currentName&&actions.has(name)){const next=actions.get(name);next.reset().setEffectiveWeight(1).play();if(current)current.crossFadeTo(next,.18,false);current=next;currentName=name}mixer.update(dt)}update(0,'idle');
  return {update,model,mixer,actions};
 }

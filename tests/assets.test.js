@@ -42,7 +42,14 @@ test('actual uploaded GLBs parse, animate and fit the desktop and portrait view'
    for(let i=0;i<90;i++)assets.update(1/60,{playing:true,weapon:true,moving:0,running:false,repairing:false,lightOn:true,reduced:true,aspect});
    assets.viewScene.updateMatrixWorld(true);assets.viewCamera.updateMatrixWorld(true);
    for(const name of ['view-revolver','view-flashlight']){const model=assets.viewScene.getObjectByName(name);const world=model.getWorldPosition(new THREE.Vector3());const screen=world.project(assets.viewCamera);assert.ok(Math.abs(screen.x)<1,name+' must be visible horizontally at aspect '+aspect);assert.ok(Math.abs(screen.y)<1,name+' must be visible vertically');assert.ok(screen.z<1&&screen.z>-1);}
-   assets.fire();for(let i=0;i<60;i++)assets.update(1/60,{playing:true,weapon:true,moving:1,running:false,repairing:false,lightOn:true,reduced:false,aspect});
+   const hand=assets.viewScene.getObjectByName('handR'),index=assets.viewScene.getObjectByName('f_index02R'),gun=assets.viewScene.getObjectByName('view-revolver');
+   assert.ok(index.quaternion.angleTo(new THREE.Quaternion())>.8,'trigger finger bends instead of pointing like a finger gun');
+   const relative=hand.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(gun.getWorldQuaternion(new THREE.Quaternion()));
+   assets.fire();for(let i=0;i<20;i++)assets.update(1/60,{playing:true,weapon:true,moving:1,running:false,repairing:false,lightOn:true,reduced:false,aspect});
+   assets.viewScene.updateMatrixWorld(true);
+   const after=hand.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(gun.getWorldQuaternion(new THREE.Quaternion()));
+   assert.ok(relative.angleTo(after)<.01,'revolver follows the wrist during recoil');
+   for(let i=0;i<40;i++)assets.update(1/60,{playing:true,weapon:true,moving:0,running:false,repairing:false,lightOn:true,reduced:false,aspect});
   }
  }finally{globalThis.fetch=previousFetch}
 });

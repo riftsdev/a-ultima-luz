@@ -31,6 +31,8 @@ python3 -m http.server 8080 --directory dist
 
 Abra http://localhost:8080. Para rodar os testes, instale Node.js 20 ou mais recente e execute `npm test`; não é necessário instalar pacotes npm.
 
-Os scripts em `tools/` são utilitários de preparação, dispensáveis para jogar. Eles usam Blender 4.x e Python com Pillow. `source-assets/` contém os originais de trabalho e não é versionado. Defina `SURVIVAL_ASSET_DIR` para apontar à pasta dos GLBs originais quando reexecutar a preparação. As versões otimizadas necessárias ao jogo já estão incluídas em `dist/assets/`.
+Os scripts em `tools/` são utilitários de preparação, dispensáveis para jogar. Eles usam Blender 4.x e Python com Pillow; o gerador de rugido usa NumPy, SciPy e FFmpeg. `source-assets/` contém os originais de trabalho e não é versionado. Defina `SURVIVAL_ASSET_DIR` para apontar à pasta dos GLBs originais quando reexecutar a preparação. As versões otimizadas necessárias ao jogo já estão incluídas em `dist/assets/`.
 
 A pasta `android/` contém a versão Android com todos os assets incluídos no APK. Consulte [as instruções de compilação](android/README.md). O código web continua sendo a fonte única do jogo; o processo Android copia `dist/` automaticamente.
+
+Versão 1.20.3: nova empunhadura do revólver com dedos fechados e arma acompanhando o punho; rugido próprio em AAC, audível também quando o alossauro já está em alerta; itens apoiados nas mesas/chão, sem flutuação; remoção de móvel sobreposto à cabana; restauração dos controles por toque ao pausar ou voltar ao aplicativo Android. Saves anteriores continuam compatíveis. O APK usa a mesma assinatura e pode atualizar a versão 1.2.0.
