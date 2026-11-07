@@ -1,5 +1,5 @@
 import * as THREE from './assets/three.module.min.js';
-import {ITEMS,CAR,freshState,parseSave,collect,goal,move,advanceRepair,bearing,sightBlocked,takeWeapon,shootAt} from './game-core.js';
+import {ITEMS,CAR,freshState,parseSave,collect,goal,move,blocked,advanceRepair,bearing,sightBlocked,takeWeapon,shootAt} from './game-core.js';
 import {createForestLayout,TRAILS} from './forest-layout.js';
 import {createGameAssets,createVehicleAudio} from './game-assets.js';
 const $=id=>document.getElementById(id), touch=matchMedia('(pointer:coarse)').matches;
