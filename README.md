@@ -1,6 +1,6 @@
 # A Última Luz
 
-[Jogar no navegador](https://riftsdev.github.io/a-ultima-luz/)
+[Jogar no navegador](https://riftsdev.github.io/a-ultima-luz/) · [Downloads Android](https://github.com/riftsdev/a-ultima-luz/releases)
 
 Jogo de terror 3D em HTML, CSS e JavaScript, em português. Arquivos prontos em `dist/`; publique esse diretório por HTTPS. Não abra `index.html` por `file://`, pois o jogo utiliza módulos JavaScript.
 
@@ -32,3 +32,5 @@ python3 -m http.server 8080 --directory dist
 Abra http://localhost:8080. Para rodar os testes, instale Node.js 20 ou mais recente e execute `npm test`; não é necessário instalar pacotes npm.
 
 Os scripts em `tools/` são utilitários de preparação, dispensáveis para jogar. Eles usam Blender 4.x e Python com Pillow. `source-assets/` contém os originais de trabalho e não é versionado. Defina `SURVIVAL_ASSET_DIR` para apontar à pasta dos GLBs originais quando reexecutar a preparação. As versões otimizadas necessárias ao jogo já estão incluídas em `dist/assets/`.
+
+A pasta `android/` contém a versão Android com todos os assets incluídos no APK. Consulte [as instruções de compilação](android/README.md). O código web continua sendo a fonte única do jogo; o processo Android copia `dist/` automaticamente.

@@ -28,6 +28,6 @@
 <dialog id="dialog"><button id="close-dialog" class="close" aria-label="Fechar">×</button><div id="dialog-body"></div></dialog>
 <div id="loading"><span class="mark">◈</span><p>ENTRANDO NA FLORESTA</p><span id="load-status">Preparando a noite…</span></div>
 <script type="module" src="game.js"></script>
-<script>window.addEventListener('error',function(e){if(!window.gameReady){document.getElementById('load-status').textContent='Não foi possível iniciar. Recarregue em um navegador com WebGL.'}});if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}</script>
+<script>window.addEventListener('error',function(e){if(!window.gameReady){document.getElementById('load-status').textContent='Não foi possível iniciar. Recarregue em um navegador com WebGL.'}});window.isNativeApp=location.hostname==='appassets.androidplatform.net';if(window.isNativeApp)document.getElementById('install').hidden=true;if(!window.isNativeApp&&'serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}</script>
 <noscript>Ative JavaScript para jogar A Última Luz.</noscript>
 </body></html>

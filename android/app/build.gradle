@@ -1,0 +1,40 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'io.github.riftsdev.aultimaluz'
+    compileSdk 35
+    buildFeatures { buildConfig true }
+    defaultConfig {
+        applicationId 'io.github.riftsdev.aultimaluz'
+        minSdk 26
+        targetSdk 35
+        versionCode 12
+        versionName '1.2.0'
+    }
+    signingConfigs {
+        release {
+            if (System.getenv('ANDROID_KEYSTORE_PATH')) {
+                storeFile file(System.getenv('ANDROID_KEYSTORE_PATH'))
+                storePassword System.getenv('ANDROID_KEY_PASSWORD')
+                keyAlias 'ultima-luz'
+                keyPassword System.getenv('ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
+    buildTypes {
+        release { signingConfig signingConfigs.release; minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets.main.assets.srcDirs = [layout.buildDirectory.dir('generated/gameAssets')]
+}
+
+def copyGameAssets = tasks.register('copyGameAssets', Sync) {
+    from('../../dist') { into 'game' }
+    into layout.buildDirectory.dir('generated/gameAssets')
+}
+tasks.named('preBuild').configure { dependsOn copyGameAssets }
+
+dependencies { implementation 'androidx.webkit:webkit:1.12.1' }
