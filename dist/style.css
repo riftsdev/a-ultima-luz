@@ -6,3 +6,12 @@
 @media(prefers-reduced-motion:reduce){.grain{display:none}#loading .mark{animation:none}}
 #touch-fire{position:absolute;right:32px;bottom:195px;width:75px;height:58px;pointer-events:auto;touch-action:none;border:1px solid #d68d5477;border-radius:30px;background:#1b211be6;color:#edba83;font-size:10px;letter-spacing:1px}#touch-fire:active{background:#a86437;color:white}.asset-notice{position:absolute;bottom:68px;left:5vw;color:#d3b99a;font-size:10px;max-width:320px}.touch .inventory{gap:10px}.touch .inventory>span{letter-spacing:.5px}
 @media(max-height:500px){#touch-fire{right:170px;bottom:62px;width:62px;height:62px}}
+
+/* Adjustable touch HUD, kept separate from desktop overlays. */
+.touch #joystick{transform:translate(var(--hud-x,0px),var(--hud-y,0px)) scale(var(--hud-scale,1));transform-origin:bottom left;opacity:var(--hud-opacity,.85)}
+.touch .touch-actions{transform:translate(calc(-1 * var(--hud-x,0px)),var(--hud-y,0px)) scale(var(--hud-scale,1));transform-origin:bottom right;opacity:var(--hud-opacity,.85)}
+.touch #touch-fire{transform:translate(calc(-1 * var(--hud-x,0px)),var(--hud-y,0px)) scale(var(--hud-scale,1));opacity:var(--hud-opacity,.85)}
+
+.touch #touch-switch{position:absolute;right:165px;bottom:145px;width:64px;height:42px;border:1px solid #c7ddc54a;border-radius:22px;background:#07130ecc;font-size:10px;pointer-events:auto;touch-action:manipulation;opacity:var(--hud-opacity,.85);transform:translate(calc(-1 * var(--hud-x,0px)),var(--hud-y,0px)) scale(var(--hud-scale,1));transform-origin:bottom right}
+
+.touch #touch-holster{position:absolute;right:165px;bottom:196px;width:70px;height:42px;border:1px solid #c7ddc54a;border-radius:22px;background:#07130ecc;font-size:10px;pointer-events:auto;touch-action:manipulation;opacity:var(--hud-opacity,.85)}

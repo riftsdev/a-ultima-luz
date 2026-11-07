@@ -8,7 +8,7 @@ No GitHub Pages, mantenha a origem na branch `main`, pasta `/ (root)`. O `index.
 
 Inclui introdução de 23 segundos, cabana acessível, floresta, chuva, áudio, alossauro animado, três peças coletáveis, reparo, vitória e derrota, progresso local, pausa, controles de teclado/mouse e toque, qualidade gráfica e PWA com ícones próprios. Sem backend ou dependências externas durante a partida.
 
-PC: WASD ou setas, mouse, E interagir/segurar para reparar, Shift correr, F lanterna, R sinalizador, P/Esc pausa. Celular: joystick esquerdo, arraste à direita, botões USAR, CORRER, ☼ e ✦. Fones recomendados.
+PC: WASD ou setas, mouse, E interagir/segurar para reparar, Shift correr, F lanterna, R sinalizador, Q trocar arma, H guardar/equipar, P/Esc pausa. Celular: joystick esquerdo, arraste à direita, botões USAR, CORRER, ☼ e ✦. Fones recomendados.
 
 Assets da versão 1.1: station wagon do GGBotNet e seus sons; braços animados de Drillimpact; árvores, troncos e vegetação de LAS; revólver de David Boese. Os modelos enviados foram selecionados e otimizados em `dist/assets/models/`. Os pacotes completos permanecem fora do download do jogo. Sons em AAC/M4A para compatibilidade com Safari/iPhone. Créditos e alterações estão em `dist/assets/CREDITS.txt`.
 
@@ -36,3 +36,5 @@ Os scripts em `tools/` são utilitários de preparação, dispensáveis para jog
 A pasta `android/` contém a versão Android com todos os assets incluídos no APK. Consulte [as instruções de compilação](android/README.md). O código web continua sendo a fonte única do jogo; o processo Android copia `dist/` automaticamente.
 
 Versão 1.20.3: nova empunhadura do revólver com dedos fechados e arma acompanhando o punho; rugido próprio em AAC, audível também quando o alossauro já está em alerta; itens apoiados nas mesas/chão, sem flutuação; remoção de móvel sobreposto à cabana; restauração dos controles por toque ao pausar ou voltar ao aplicativo Android. Saves anteriores continuam compatíveis. O APK usa a mesma assinatura e pode atualizar a versão 1.2.0.
+
+A versão 1.20.3 também integra as casas abandonadas, a escopeta e os ajustes de HUD já adicionados ao repositório. As peças permanecem escondidas nos arredores dos três locais; seus suportes foram alinhados às novas posições. Guardar a arma não faz o revólver reaparecer na cabana, e a vegetação respeita o espaço das casas.

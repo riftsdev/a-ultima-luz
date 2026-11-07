@@ -15,7 +15,7 @@ test('actual uploaded GLBs parse, animate and fit the desktop and portrait view'
   const trunk=new THREE.InstancedMesh(new THREE.BoxGeometry(),fallback.material,8),foliage=new THREE.InstancedMesh(new THREE.BoxGeometry(),fallback.material,24);
   const treeSpots=Array.from({length:8},(_,i)=>({x:8+i*3,z:i*3-10,h:9}));
   const monster=new THREE.Group();scene.add(monster);
-  const walls=[{x:ITEMS[0].x,z:ITEMS[0].z,w:2,d:1},{x:-10,z:-10.7,w:.9,d:.6}];
+  const walls=[{x:ITEMS[0].x,z:ITEMS[0].z,w:1.1,d:1},{x:-10,z:-10.7,w:.9,d:.6}];
   const assets=createGameAssets({scene,car,treeSpots,trunk,foliage,walls,monster,loader});await assets.ready;
   assert.deepEqual(assets.diagnostics.failed,[]);assert.equal(assets.diagnostics.loaded.length,6);assert.equal(fallback.visible,false);
   assert.equal(scene.children.filter(o=>o.isInstancedMesh).length,3);
@@ -50,6 +50,7 @@ test('actual uploaded GLBs parse, animate and fit the desktop and portrait view'
    const after=hand.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(gun.getWorldQuaternion(new THREE.Quaternion()));
    assert.ok(relative.angleTo(after)<.01,'revolver follows the wrist during recoil');
    for(let i=0;i<40;i++)assets.update(1/60,{playing:true,weapon:true,moving:0,running:false,repairing:false,lightOn:true,reduced:false,aspect});
+   assets.update(0,{playing:true,weapon:false,ownsRevolver:true,moving:0,running:false,repairing:false,lightOn:true,reduced:true,aspect});assert.equal(assets.gunPickup.visible,false,'holstering must not respawn the collected revolver');
   }
  }finally{globalThis.fetch=previousFetch}
 });
